@@ -11,7 +11,7 @@ spec:
         spec:
           containers:
           - name: psql-bkp
-            image: ghcr.io/andresb39/psql-bkp/psql-bkp:1
+            image: ghcr.io/andresb39/psql-bkp/psql-bkp:1.1
             imagePullPolicy: Always
             env:
             - name: PGUSER
@@ -24,6 +24,11 @@ spec:
                 secretKeyRef:
                   name: secret
                   key: PGPASSWORD
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: PGDATABASE
             - name: PGHOST
               valueFrom:
                 secretKeyRef:

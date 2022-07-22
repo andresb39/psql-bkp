@@ -31,7 +31,7 @@ done
 
 # Variables
 DATE="$(date +%Y-%m-%d)"
-DBS=`psql -l -t | cut -d'|' -f1 | sed -e 's/ //g' -e '/^$/d' | grep -v template | grep -v rdsadmin`
+DBS=$(psql -d $PGDATABASE -l -t | cut -d'|' -f1 | sed -e 's/ //g' -e '/^$/d' | grep -v template | grep -v rdsadmin)
 
 # Backing up databases
 for db in $DBS; do
