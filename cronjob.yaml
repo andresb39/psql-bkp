@@ -1,0 +1,53 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mongo-backups
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: psql-bkp
+            image: andresb39/psql-bkp:v1.0.2 
+            imagePullPolicy: Always
+            env:
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: PGUSER
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: PGPASSWORD
+            - name: PGHOST
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: PGHOST
+            - name: S3_BUCKET
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: S3_BUCKET
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_DEFAULT_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: AWS_DEFAULT_REGION
+
+          restartPolicy: OnFailure
