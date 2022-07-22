@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: mongo-backups
+  name: psql-bkp
 spec:
   schedule: "*/5 * * * *"
   jobTemplate:
@@ -11,7 +11,7 @@ spec:
         spec:
           containers:
           - name: psql-bkp
-            image: ghcr.io/andresb39/psql-bkp/psql-bkp:1.1
+            image: ghcr.io/andresb39/psql-bkp/psql-bkp:1
             imagePullPolicy: Always
             env:
             - name: PGUSER
