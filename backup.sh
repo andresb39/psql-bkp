@@ -38,7 +38,7 @@ for db in $DBS; do
     echo "Backing up $db"
     pg_dump -Fc -f $db.dump $db
     echo "Compressing $db"
-    gzip /backup/$db.dump
+    gzip $db.dump
 done
 
 # Uploading to S3
