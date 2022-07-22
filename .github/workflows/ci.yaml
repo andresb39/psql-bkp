@@ -1,4 +1,4 @@
-name: Docker
+name: PSQL Backup 
 
 on:
   push:
