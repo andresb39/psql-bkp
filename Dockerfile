@@ -5,7 +5,7 @@ LABEL Version="1.0" \
       Date="Julio 2022"
 
 RUN apk update --no-cache && \
-    apk add aws-cli bash postgresql curl openssl && \
+    apk add aws-cli bash postgresql curl && \
     rm -rf /var/cache/apk/*
 
 WORKDIR /backups
